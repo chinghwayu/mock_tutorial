@@ -1,13 +1,13 @@
 import socket
 import pytest
-from mock_tutorial.driver import Driver
+from driver import Driver
 
 
 def test_driver_integrated():
     d = Driver(socket.gethostname())
     result = d.disk_free()
     percent = d.extract_percent(result)
-    assert percent == "76%"
+    assert percent == "75%"
 
 
 def test_driver_unit(mocker):
@@ -18,7 +18,7 @@ def test_driver_unit(mocker):
     ]
     output = "\n".join(output_list)
     mock_run = mocker.patch(
-        "mock_tutorial.driver.Driver.run", return_value=output
+        "driver.Driver.run", return_value=output
     )
     d = Driver(socket.gethostname())
     result = d.disk_free()
